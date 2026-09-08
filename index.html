@@ -22,12 +22,47 @@
 html,body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-height:100vh;min-height:100dvh;overscroll-behavior:none}
 
 /* ── BOTTOM NAV ── */
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--surface);border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;height:var(--nav-h);padding-bottom:env(safe-area-inset-bottom)}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--surface);border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(3,1fr);height:var(--nav-h);padding-bottom:env(safe-area-inset-bottom)}
 .nav-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;border:none;background:none;color:var(--muted2);font-family:'Barlow',sans-serif;font-size:11px;letter-spacing:1px;text-transform:uppercase;padding-top:6px;transition:color 0.2s}
 .nav-btn.active{color:var(--accent)}
 .nav-icon{font-size:20px;line-height:1}
 .nav-btn.active .nav-gym-icon{color:var(--accent)}
 .nav-btn.active .nav-diet-icon{color:var(--green)}
+.nav-hist-btn.active{color:var(--blue)}
+
+/* ── HISTORIAL ── */
+.hist-topbar{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);padding:14px 20px 12px;display:flex;align-items:center;justify-content:space-between}
+.hist-title{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue)}
+.hist-sub{font-size:12px;color:var(--muted2);letter-spacing:1px;margin-top:1px}
+.hist-actions{display:flex;gap:8px;padding:12px 16px}
+.hist-act-btn{flex:1;background:var(--card);border:1px solid var(--border);color:var(--muted2);font-family:'Barlow',sans-serif;font-size:12px;font-weight:500;padding:9px 6px;border-radius:8px;cursor:pointer}
+.hist-act-btn:active{border-color:var(--blue);color:var(--blue)}
+.hist-empty{padding:48px 28px;text-align:center;color:var(--muted2);font-size:14px;line-height:1.7}
+.sess-card{margin:0 16px 10px;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.sess-head{padding:13px 16px;display:flex;align-items:center;gap:12px;cursor:pointer}
+.sess-date{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:.5px}
+.sess-meta{font-size:11px;color:var(--muted2);margin-top:2px}
+.sess-vol{margin-left:auto;text-align:right;flex-shrink:0}
+.sess-vol-n{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;line-height:1}
+.sess-vol-l{font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+.sess-delta{font-size:11px;font-weight:600;margin-top:2px}
+.sess-body{display:none;border-top:1px solid var(--border);padding:10px 16px 14px}
+.sess-card.open .sess-body{display:block}
+.sess-ex{padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.sess-ex:last-child{border-bottom:none}
+.sess-ex-name{font-size:13px;font-weight:500;margin-bottom:3px}
+.sess-sets{display:flex;flex-wrap:wrap;gap:5px}
+.sess-set{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;background:rgba(255,255,255,.05);border-radius:5px;padding:2px 7px;color:var(--muted2)}
+.sess-set b{color:var(--accent);font-weight:700}
+.sess-set i{color:var(--blue);font-style:normal;font-weight:700}
+.sess-del{background:none;border:none;color:var(--muted);font-size:12px;font-family:'Barlow',sans-serif;padding:8px 0 0;cursor:pointer}
+
+/* ── GUARDAR SESION ── */
+.save-wrap{margin:18px 16px 8px}
+.save-btn{width:100%;background:var(--green-dim);border:1px solid rgba(74,222,128,.35);color:var(--green);font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:14px;border-radius:12px;cursor:pointer}
+.save-btn:active{transform:scale(.985)}
+.save-hint{font-size:11px;color:var(--muted);text-align:center;margin-top:8px;line-height:1.5}
+.last-line{font-size:11px;color:var(--blue);margin-bottom:10px;letter-spacing:.3px}
 .nav-diet-btn.active{color:var(--green)}
 
 /* ── SCREENS ── */
@@ -89,13 +124,15 @@ html,body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif
 .set-bubble{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--muted);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:var(--muted2);cursor:pointer;transition:all 0.18s;font-family:'Barlow Condensed',sans-serif;flex-shrink:0}
 .set-bubble.done-set{background:var(--green-dim);border-color:var(--green);color:var(--green)}
 .set-bubble:active{transform:scale(.9)}
-.set-weight-wrap{display:flex;align-items:center;gap:6px;flex:1}
-.set-weight-input{width:72px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:600;padding:6px 10px;text-align:center;outline:none;transition:border-color 0.15s;-moz-appearance:textfield}
+.set-weight-wrap{display:flex;align-items:center;gap:5px;flex:1;min-width:0}
+.set-weight-input{width:100%;min-width:0;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:600;padding:6px 4px;text-align:center;outline:none;transition:border-color 0.15s;-moz-appearance:textfield}
 .set-weight-input::-webkit-outer-spin-button,.set-weight-input::-webkit-inner-spin-button{-webkit-appearance:none}
 .set-weight-input:focus{border-color:var(--muted2)}
 .set-weight-input.has-value{border-color:var(--muted);color:var(--accent)}
-.set-weight-unit{font-size:12px;color:var(--muted)}
-.set-reps-label{font-size:12px;color:var(--muted);margin-left:4px}
+.set-weight-input.set-reps-input.has-value{color:var(--blue)}
+.set-field{display:flex;align-items:center;gap:4px;flex:1;min-width:0}
+.set-weight-unit{font-size:12px;color:var(--muted);flex-shrink:0}
+.set-x{font-size:13px;color:var(--muted);flex-shrink:0;padding:0 1px}
 
 .rest-screen{padding:48px 24px;text-align:center}
 .rest-icon{font-size:48px;margin-bottom:20px}
@@ -260,6 +297,22 @@ html,body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif
   </div>
 </div>
 
+<!-- ══ HISTORIAL SCREEN ══ -->
+<div id="screen-hist" class="screen">
+  <div class="hist-topbar">
+    <div>
+      <div class="hist-title">HISTORIAL</div>
+      <div class="hist-sub" id="hist-sub"></div>
+    </div>
+  </div>
+  <div class="hist-actions">
+    <button class="hist-act-btn" onclick="exportData()">⧉ Copiar</button>
+    <button class="hist-act-btn" onclick="downloadData()">↓ Bajar</button>
+    <button class="hist-act-btn" onclick="importData()">↑ Restaurar</button>
+  </div>
+  <div id="histContent"></div>
+</div>
+
 <!-- ══ BOTTOM NAV ══ -->
 <div class="bottom-nav">
   <button class="nav-btn active" id="nav-gym" onclick="setScreen('gym')">
@@ -270,6 +323,10 @@ html,body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif
     <div class="nav-icon nav-diet-icon">🥗</div>
     <span>Dieta</span>
   </button>
+  <button class="nav-btn nav-hist-btn" id="nav-hist" onclick="setScreen('hist')">
+    <div class="nav-icon">📈</div>
+    <span>Historial</span>
+  </button>
 </div>
 
 <script>
@@ -279,34 +336,14 @@ html,body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif
 const DAYS = [
   { id:'lun', name:'Lun', shortName:'Lunes', type:'padel', label:'Padel', color:'#4ade80' },
   {
-    id:'mar', name:'Mar', shortName:'Martes', type:'push', label:'Push', color:'#e8ff47',
-    title:'Push Day', subtitle:'Pecho · Hombros · Tríceps · Core', duration:'65-75 min',
-    sections:[
-      { name:'Pecho', exercises:[
-        { name:'Press banca plano con barra', sets:4, reps:'6-8', note:'Descenso controlado 3 seg, codos a 75°. Conectá el pectoral al bajar.' },
-        { name:'Press inclinado con mancuernas (30°)', sets:3, reps:'8-10', note:'Ángulo 30°, no más. Énfasis en pec superior — clave para la zona de acumulación.' },
-        { name:'Aperturas en polea cruzada baja→alta', sets:3, reps:'12-15', note:'Ángulo ascendente ataca el pec inferior. Contracción completa en el centro, sin inercia.' },
-      ]},
-      { name:'Hombros · Tríceps', exercises:[
-        { name:'Press militar con mancuernas', sets:3, reps:'8-10', note:'No arquees la lumbar. Sentado si preferís mayor estabilidad.' },
-        { name:'Elevaciones laterales', sets:3, reps:'15', note:'Peso liviano. Codo ligeramente flexionado. Subí hasta paralelo al suelo.' },
-        { name:'Fondos en paralelas (dips)', sets:3, reps:'8-12', note:'Inclinarte adelante aumenta el énfasis pectoral. Bajá hasta 90° de codo.' },
-      ]},
-      { name:'Core — Antiextensión', exercises:[
-        { name:'Plancha frontal', sets:3, reps:'45 seg', note:'Glúteos apretados, abdominales activos. No cedas las caderas ni el cuello.' },
-        { name:'Rueda abdominal (ab wheel)', sets:3, reps:'8-10', note:'Controlá la bajada. Si falla la forma, reducí rango. Empezá de rodillas si hace falta.' },
-      ]},
-    ]
-  },
-  {
-    id:'mie', name:'Mié', shortName:'Miércoles', type:'pull', label:'Pull', color:'#60d0ff',
-    title:'Pull Day', subtitle:'Espalda · Bíceps · Core', duration:'65-75 min',
+    id:'mar', name:'Mar', shortName:'Martes', type:'pull', label:'Pull', color:'#60d0ff',
+    title:'Pull Day', subtitle:'Espalda · Bíceps · Core', duration:'55-60 min',
     sections:[
       { name:'Espalda', exercises:[
         { name:'Dominadas o jalón al pecho', sets:4, reps:'6-10', note:'Agarre pronado ancho. Llevá el pecho hacia la barra, no la barbilla.' },
-        { name:'Remo con barra', sets:4, reps:'6-8', note:'Tirá hacia el ombligo. Espalda baja neutra durante todo el movimiento.' },
+        { name:'Remo con mancuerna a un brazo', sets:4, reps:'10-12 c/brazo', note:'Mano y rodilla del mismo lado apoyadas en el banco, espalda paralela al piso. Codo hacia la cadera, sin rotar el torso para ganar recorrido.' },
         { name:'Remo en polea baja sentado', sets:3, reps:'10-12', note:'Retracción escapular completa al final. Codos pegados al cuerpo.' },
-        { name:'Face pull en polea alta (cuerda)', sets:3, reps:'15', note:'Rotación externa de hombros al final. Esencial para salud del manguito rotador.' },
+        { name:'Face pull en polea alta (cuerda)', sets:3, reps:'15', note:'Rotación externa de hombros al final. Esencial después del padel del lunes.' },
       ]},
       { name:'Bíceps', exercises:[
         { name:'Curl con barra EZ', sets:3, reps:'10-12', note:'Sin oscilar el torso. Codos fijos a los costados del cuerpo.' },
@@ -314,27 +351,46 @@ const DAYS = [
       ]},
       { name:'Core — Antirrotación', exercises:[
         { name:'Pallof press en polea', sets:3, reps:'12 c/lado', note:'Caderas cuadradas durante todo el movimiento. Resistí activamente la rotación.' },
-        { name:'Dead bug', sets:3, reps:'8 c/lado', note:'Lumbar pegada al piso siempre. Movimiento lento y controlado.' },
       ]},
     ]
   },
   {
-    id:'jue', name:'Jue', shortName:'Jueves', type:'legs', label:'Legs', color:'#ff8c5a',
-    title:'Leg Day', subtitle:'Piernas · Glúteos · Core', duration:'65-75 min',
+    id:'mie', name:'Mié', shortName:'Miércoles', type:'legs', label:'Legs', color:'#ff8c5a',
+    title:'Leg Day', subtitle:'Piernas · Glúteos · Core', duration:'60-65 min',
     sections:[
       { name:'Cuádriceps · Glúteos', exercises:[
         { name:'Sentadilla con barra', sets:4, reps:'6-8', note:'Por debajo de paralelo si la movilidad lo permite. Rodillas en línea con los pies.' },
+        { name:'Sentadilla búlgara con mancuernas', sets:3, reps:'8-10 c/pierna', note:'Pie trasero elevado en el banco. La rodilla de adelante no se va hacia adentro. Semanas 1-2 solo peso corporal o mancuernas livianas, aprendiendo el patrón.' },
         { name:'Prensa 45°', sets:3, reps:'10-12', note:'Rango completo. No bloquees las rodillas arriba. Pie en posición media.' },
-        { name:'Extensión de cuádriceps en máquina', sets:3, reps:'12-15', note:'Contracción en el tope. Bajada lenta (3 seg). Accesorio de acabado.' },
       ]},
       { name:'Isquios · Glúteos · Gemelos', exercises:[
-        { name:'Peso muerto rumano', sets:3, reps:'8-10', note:'Barra cerca del cuerpo en todo momento. Sentís el estiramiento en isquios.' },
+        { name:'Peso muerto rumano', sets:4, reps:'8-10', note:'Barra cerca del cuerpo en todo momento. Sentís el estiramiento en isquios.' },
         { name:'Curl femoral tumbado', sets:3, reps:'12-15', note:'Controlá la bajada. No uses inercia ni levantés las caderas.' },
-        { name:'Elevación de gemelos de pie', sets:4, reps:'15-20', note:'Pausa de 1 seg arriba y 1 seg abajo. Rango completo de movimiento.' },
+        { name:'Elevación de gemelos de pie', sets:3, reps:'15-20', note:'Pausa de 1 seg arriba y 1 seg abajo. Rango completo de movimiento.' },
       ]},
       { name:'Core — Flexión Dinámica', exercises:[
         { name:'Cable crunch en polea alta', sets:3, reps:'15', note:'Flexión de columna, no de caderas. Codos fijos a los costados de la cabeza.' },
-        { name:'Elevación de piernas colgado', sets:3, reps:'10-12', note:'Sin balanceo. Si es difícil, hacé rodillas al pecho primero y progresá.' },
+      ]},
+    ]
+  },
+  {
+    id:'jue', name:'Jue', shortName:'Jueves', type:'push', label:'Push', color:'#e8ff47',
+    title:'Push Day', subtitle:'Pecho · Hombros · Tríceps · Core', duration:'55-60 min',
+    sections:[
+      { name:'Pecho', exercises:[
+        { name:'Press banca plano con barra', sets:4, reps:'6-8', note:'Descenso controlado 3 seg, codos a 75°. Conectá el pectoral al bajar.' },
+        { name:'Press inclinado con mancuernas (30°)', sets:3, reps:'8-10', note:'Ángulo 30°, no más. Énfasis en pec superior — clave para la zona de acumulación.' },
+      ]},
+      { name:'Hombros · Tríceps', exercises:[
+        { name:'Press militar con mancuernas', sets:3, reps:'8-10', note:'Único empuje vertical de la semana: va tercero para que lo hagas con energía. No arquees la lumbar.' },
+        { name:'Fondos en paralelas (dips)', sets:3, reps:'8-12', note:'Inclinarte adelante aumenta el énfasis pectoral. Bajá hasta 90° de codo.' },
+        { name:'Elevaciones laterales', sets:4, reps:'12-15', note:'Peso liviano, descanso corto. Codo ligeramente flexionado. Es el trabajo que más ancho de hombro te da.' },
+      ]},
+      { name:'Pecho — Aislamiento', exercises:[
+        { name:'Aperturas en polea cruzada baja→alta', sets:2, reps:'12-15', note:'Ángulo ascendente ataca el pec inferior. Contracción completa en el centro, sin inercia.' },
+      ]},
+      { name:'Core — Antiextensión', exercises:[
+        { name:'Elevación de piernas colgado', sets:3, reps:'10-12', note:'Sin balanceo. Enrollá la pelvis al final — no alcanza con levantar las piernas. Si no llegás a 10, empezá con rodillas al pecho.' },
       ]},
     ]
   },
@@ -346,6 +402,56 @@ const DAYS = [
 const DAY_JS_TO_IDX = [6,0,1,2,3,4,5];
 let activeDay = DAY_JS_TO_IDX[new Date().getDay()];
 let gymState = JSON.parse(localStorage.getItem('rutina_state') || '{}');
+
+/* ── MIGRACIÓN v1 → v3: reordenamiento de días y ejercicios ──
+   Push pasa de martes a jueves, Pull de miércoles a martes, Legs de jueves a miércoles.
+   Los pesos se guardaban por posición, así que hay que remapearlos o quedan en el
+   ejercicio equivocado. Corre una sola vez. */
+const ROUTINE_VER = 3;
+(function migrateRoutine() {
+  if (parseInt(localStorage.getItem('rutina_ver') || '1', 10) >= ROUTINE_VER) return;
+  const MAP = {
+    mar: { day:'jue', idx:{0:0, 1:1, 2:5, 3:2, 4:4, 5:3} },
+    mie: { day:'mar', idx:{0:0, 2:2, 3:3, 4:4, 5:5, 6:6} },
+    jue: { day:'mie', idx:{0:0, 1:2, 3:3, 4:4, 5:5, 6:6} }
+  };
+  const out = {};
+  Object.keys(gymState).forEach(k => {
+    const m = k.match(/^(lun|mar|mie|jue|vie|sab|dom)_(\d+)(.*)$/);
+    if (!m) { out[k] = gymState[k]; return; }
+    const rule = MAP[m[1]];
+    if (!rule) { out[k] = gymState[k]; return; }
+    const ni = rule.idx[parseInt(m[2], 10)];
+    if (ni === undefined) return;
+    out[rule.day + '_' + ni + m[3]] = gymState[k];
+  });
+  gymState = out;
+  localStorage.setItem('rutina_state', JSON.stringify(gymState));
+  localStorage.setItem('rutina_ver', String(ROUTINE_VER));
+})();
+let sessionLog = JSON.parse(localStorage.getItem('rutina_history') || '[]');
+function saveHistory() { localStorage.setItem('rutina_history', JSON.stringify(sessionLog)); }
+
+function lastDone(dayId, exName) {
+  for (let i = sessionLog.length - 1; i >= 0; i--) {
+    if (sessionLog[i].dayId !== dayId) continue;
+    const e = sessionLog[i].exercises.find(x => x.name === exName);
+    if (e) return { sets: e.sets, date: sessionLog[i].date };
+  }
+  return null;
+}
+function fmtDate(iso) {
+  const d = new Date(iso + 'T12:00:00');
+  return d.toLocaleDateString('es-AR', { day:'2-digit', month:'2-digit' });
+}
+function volume(exercises) {
+  let v = 0;
+  exercises.forEach(e => e.sets.forEach(s => {
+    const kg = parseFloat(s.kg), r = parseFloat(s.reps);
+    if (!isNaN(kg) && !isNaN(r)) v += kg * r;
+  }));
+  return Math.round(v);
+}
 
 function getKey(dayId, exIdx) { return `${dayId}_${exIdx}`; }
 function getSetKey(dayId, exIdx, setIdx) { return `${dayId}_${exIdx}_s${setIdx}`; }
@@ -398,7 +504,7 @@ function renderGym() {
     return;
   }
   if (day.type === 'padel') {
-    content.innerHTML = `<div class="anim rest-screen"><div class="rest-icon">🎾</div><div class="rest-title">NOCHE DE PADEL</div><div class="rest-sub">Cardio + potencia cubiertos.<br>Calentá bien y disfrutalo.<br><br><span style="color:var(--muted);font-size:12px">Mañana: Push Day</span></div></div>`;
+    content.innerHTML = `<div class="anim rest-screen"><div class="rest-icon">🎾</div><div class="rest-title">NOCHE DE PADEL</div><div class="rest-sub">Cardio + potencia cubiertos.<br>Calentá bien y disfrutalo.<br><br><span style="color:var(--muted);font-size:12px">Mañana: Pull Day</span></div></div>`;
     return;
   }
 
@@ -427,19 +533,34 @@ function renderGym() {
     sec.exercises.forEach(ex => {
       const isDone = !!gymState[getKey(day.id,g)];
       const isOpen = !!gymState[getKey(day.id,g)+'_open'];
+      const prev = lastDone(day.id, ex.name);
       let sets = '';
       for (let s=0; s<ex.sets; s++) {
         const sk = getSetKey(day.id,g,s);
         const kg = gymState[sk+'_kg'] || '';
+        const rp = gymState[sk+'_reps'] || '';
+        const repUnit = /seg/i.test(ex.reps) ? 'seg' : 'reps';
+        const pset = prev && prev.sets[s] ? prev.sets[s] : null;
+        const kgHint = pset && pset.kg ? pset.kg : '—';
+        const repHint = (pset && pset.reps) ? pset.reps : (ex.reps.match(/\d+(-\d+)?/) || ['—'])[0];
         sets += `<div class="set-row">
           <div class="set-bubble ${gymState[sk]?'done-set':''}" onclick="toggleSet('${day.id}',${g},${s},event)">S${s+1}</div>
           <div class="set-weight-wrap">
-            <input type="number" inputmode="decimal" placeholder="—"
-              class="set-weight-input ${kg?'has-value':''}" value="${kg}"
-              onclick="event.stopPropagation()"
-              oninput="saveWeight('${day.id}',${g},${s},this.value)">
-            <span class="set-weight-unit">kg</span>
-            <span class="set-reps-label">× ${ex.reps}</span>
+            <div class="set-field">
+              <input type="number" inputmode="decimal" placeholder="${kgHint}"
+                class="set-weight-input ${kg?'has-value':''}" value="${kg}"
+                onclick="event.stopPropagation()"
+                oninput="saveWeight('${day.id}',${g},${s},this.value)">
+              <span class="set-weight-unit">kg</span>
+            </div>
+            <span class="set-x">×</span>
+            <div class="set-field">
+              <input type="number" inputmode="numeric" placeholder="${repHint}"
+                class="set-weight-input set-reps-input ${rp?'has-value':''}" value="${rp}"
+                onclick="event.stopPropagation()"
+                oninput="saveReps('${day.id}',${g},${s},this.value)">
+              <span class="set-weight-unit">${repUnit}</span>
+            </div>
           </div>
         </div>`;
       }
@@ -449,11 +570,16 @@ function renderGym() {
           <div class="ex-info"><div class="ex-name">${ex.name}</div><div class="ex-sets">${ex.sets} series × ${ex.reps}</div></div>
           <div class="ex-toggle">⌄</div>
         </div>
-        <div class="ex-detail"><div class="ex-note">${ex.note}</div><div class="sets-tracker">${sets}</div></div>
+        <div class="ex-detail"><div class="ex-note">${ex.note}</div>${prev&&prev.sets.some(s=>s.kg||s.reps)?`<div class="last-line">Última vez (${fmtDate(prev.date)}): ${prev.sets.filter(s=>s.kg||s.reps).map(s=>`${s.kg||'—'}kg × ${s.reps||'—'}`).join('  ·  ')}</div>`:''}<div class="sets-tracker">${sets}</div></div>
       </div>`;
       g++;
     });
   });
+
+  html += `<div class="save-wrap">
+    <button class="save-btn" onclick="saveSession()">✓ Guardar sesión</button>
+    <div class="save-hint">Archiva pesos y reps con la fecha de hoy y deja el día limpio para la próxima.</div>
+  </div>`;
 
   html += `</div>`;
   content.innerHTML = html;
@@ -472,7 +598,13 @@ function toggleExDone(dayId, exIdx, e) {
   const day = DAYS.find(d => d.id === dayId);
   let g=0, ex=null;
   day.sections.forEach(s => s.exercises.forEach(e2 => { if (g===exIdx) ex=e2; g++; }));
-  if (ex && gymState[k]) for (let s=0; s<ex.sets; s++) gymState[getSetKey(dayId,exIdx,s)]=true;
+  if (ex) {
+    for (let s=0; s<ex.sets; s++) {
+      const sk = getSetKey(dayId, exIdx, s);
+      if (gymState[k]) gymState[sk] = true;
+      else delete gymState[sk];
+    }
+  }
   saveGymState(); renderGym();
 }
 
@@ -487,11 +619,173 @@ function toggleSet(dayId, exIdx, setIdx, e) {
   saveGymState(); renderGym();
 }
 
+function refreshInputStates() {
+  document.querySelectorAll('.set-weight-input').forEach(inp => inp.classList.toggle('has-value', inp.value !== ''));
+}
+
 function saveWeight(dayId, exIdx, setIdx, val) {
   const wk = getSetKey(dayId, exIdx, setIdx) + '_kg';
   val ? gymState[wk]=val : delete gymState[wk];
   saveGymState();
-  document.querySelectorAll('.set-weight-input').forEach(inp => inp.classList.toggle('has-value', inp.value !== ''));
+  refreshInputStates();
+}
+
+function saveReps(dayId, exIdx, setIdx, val) {
+  const rk = getSetKey(dayId, exIdx, setIdx) + '_reps';
+  val ? gymState[rk]=val : delete gymState[rk];
+  saveGymState();
+  refreshInputStates();
+}
+
+
+/* ═══════════════════════════════════════
+   HISTORIAL
+═══════════════════════════════════════ */
+function collectDay(day) {
+  const out = [];
+  let g = 0;
+  day.sections.forEach(sec => sec.exercises.forEach(ex => {
+    const sets = [];
+    let any = false;
+    for (let s = 0; s < ex.sets; s++) {
+      const sk = getSetKey(day.id, g, s);
+      const kg = gymState[sk+'_kg'] || '';
+      const reps = gymState[sk+'_reps'] || '';
+      const done = !!gymState[sk];
+      if (kg || reps || done) any = true;
+      sets.push({ kg, reps, done });
+    }
+    if (any) out.push({ name: ex.name, section: sec.name, sets });
+    g++;
+  }));
+  return out;
+}
+
+function saveSession() {
+  const day = DAYS[activeDay];
+  if (!day.sections) return;
+  const exercises = collectDay(day);
+  if (!exercises.length) { alert('No hay nada cargado en este día todavía.'); return; }
+  const d = new Date();
+  const iso = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  if (!confirm(`¿Guardar la sesión de ${day.shortName} (${exercises.length} ejercicios) en el historial?\n\nEl día queda limpio para la próxima vez.`)) return;
+  sessionLog.push({ id: day.id+'-'+Date.now(), date: iso, ts: Date.now(), dayId: day.id, title: day.title || day.shortName, exercises });
+  saveHistory();
+  Object.keys(gymState).filter(k => k.startsWith(day.id + '_')).forEach(k => delete gymState[k]);
+  saveGymState();
+  renderGym(); renderHistory();
+  alert('Sesión guardada ✓');
+}
+
+function renderHistory() {
+  const c = document.getElementById('histContent');
+  const sub = document.getElementById('hist-sub');
+  sub.textContent = sessionLog.length ? `${sessionLog.length} ${sessionLog.length===1?'sesión guardada':'sesiones guardadas'}` : 'Sin sesiones aún';
+
+  if (!sessionLog.length) {
+    c.innerHTML = `<div class="hist-empty">Todavía no guardaste ninguna sesión.<br><br>Cargá pesos y reps en Entreno y tocá <b>Guardar sesión</b> al terminar.</div>`;
+    return;
+  }
+
+  let html = '';
+  const ordered = sessionLog.slice().sort((a,b) => b.ts - a.ts);
+  ordered.forEach(s => {
+    const vol = volume(s.exercises);
+    const prev = ordered.find(o => o.dayId === s.dayId && o.ts < s.ts);
+    let delta = '';
+    if (prev) {
+      const pv = volume(prev.exercises);
+      if (pv > 0 && vol > 0) {
+        const pct = Math.round((vol - pv) / pv * 100);
+        const col = pct > 0 ? 'var(--green)' : (pct < 0 ? 'var(--orange)' : 'var(--muted)');
+        delta = `<div class="sess-delta" style="color:${col}">${pct>0?'▲ +':(pct<0?'▼ ':'')}${pct}%</div>`;
+      }
+    }
+    const day = DAYS.find(d => d.id === s.dayId);
+    const col = day ? day.color : 'var(--accent)';
+    html += `<div class="sess-card" id="sc-${s.id}">
+      <div class="sess-head" onclick="toggleSess('${s.id}')">
+        <div>
+          <div class="sess-date" style="color:${col}">${fmtDate(s.date)} · ${s.title}</div>
+          <div class="sess-meta">${s.exercises.length} ejercicios</div>
+        </div>
+        <div class="sess-vol">
+          <div class="sess-vol-n" style="color:${col}">${vol.toLocaleString('es-AR')}</div>
+          <div class="sess-vol-l">kg volumen</div>
+          ${delta}
+        </div>
+      </div>
+      <div class="sess-body">
+        ${s.exercises.map(e => `<div class="sess-ex">
+          <div class="sess-ex-name">${e.name}</div>
+          <div class="sess-sets">${e.sets.map((x,i) => `<span class="sess-set">S${i+1} <b>${x.kg||'—'}</b>kg × <i>${x.reps||'—'}</i></span>`).join('')}</div>
+        </div>`).join('')}
+        <button class="sess-del" onclick="delSession('${s.id}',event)">Eliminar esta sesión</button>
+      </div>
+    </div>`;
+  });
+  c.innerHTML = html;
+}
+
+function toggleSess(id) {
+  document.getElementById('sc-'+id).classList.toggle('open');
+}
+
+function delSession(id, e) {
+  e.stopPropagation();
+  if (!confirm('¿Eliminar esta sesión del historial? No se puede deshacer.')) return;
+  sessionLog = sessionLog.filter(s => s.id !== id);
+  saveHistory(); renderHistory(); renderGym();
+}
+
+/* ── EXPORTAR / RESTAURAR ── */
+function buildBackup() {
+  return JSON.stringify({ app:'gym-diego', version:2, exported:new Date().toISOString(), history:sessionLog, current:gymState }, null, 2);
+}
+
+function exportData() {
+  const txt = buildBackup();
+  const done = () => alert('Copiado ✓\n\nPegalo donde quieras guardarlo (Notas, WhatsApp, mail).');
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(done).catch(() => fallbackCopy(txt, done));
+  } else fallbackCopy(txt, done);
+}
+
+function fallbackCopy(txt, done) {
+  const ta = document.createElement('textarea');
+  ta.value = txt; ta.style.position='fixed'; ta.style.opacity='0';
+  document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, 999999);
+  try { document.execCommand('copy'); done(); } catch(err) { alert('No pude copiar automáticamente. Usá "Bajar".'); }
+  document.body.removeChild(ta);
+}
+
+function downloadData() {
+  const blob = new Blob([buildBackup()], { type:'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const d = new Date();
+  a.href = url;
+  a.download = `gym-diego-${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}.json`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+
+function importData() {
+  const txt = prompt('Pegá acá el backup (el texto que empieza con { ):');
+  if (!txt) return;
+  let data;
+  try { data = JSON.parse(txt); } catch(err) { alert('No pude leer ese texto — ¿está completo?'); return; }
+  if (!data || !Array.isArray(data.history)) { alert('El backup no tiene el formato esperado.'); return; }
+  const known = new Set(sessionLog.map(s => s.id));
+  const nuevas = data.history.filter(s => !known.has(s.id));
+  if (!confirm(`Se van a agregar ${nuevas.length} sesiones al historial actual (${sessionLog.length}). Lo que ya tenés no se borra. ¿Seguir?`)) return;
+  sessionLog = sessionLog.concat(nuevas).sort((a,b) => a.ts - b.ts);
+  saveHistory();
+  if (data.current && Object.keys(data.current).length && confirm('¿También querés restaurar el día en curso que venía en el backup? (pisa lo que tengas cargado sin guardar)')) {
+    gymState = data.current; saveGymState();
+  }
+  renderHistory(); renderGym();
+  alert('Restaurado ✓');
 }
 
 /* ═══════════════════════════════════════
@@ -650,6 +944,7 @@ function setScreen(name) {
   document.getElementById('screen-'+name).classList.add('active');
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('nav-'+name).classList.add('active');
+  if (name === 'hist') renderHistory();
 }
 
 /* ── INIT ── */
@@ -657,6 +952,7 @@ renderTopDate();
 renderWeekStrip();
 renderGym();
 renderMeals();
+renderHistory();
 </script>
 </body>
 </html>
