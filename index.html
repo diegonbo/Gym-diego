@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0c0c0c">
-<title>Diego — Gym & Dieta</title>
+<title>Diego — Entreno</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -22,7 +22,7 @@
 html,body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-height:100vh;min-height:100dvh;overscroll-behavior:none}
 
 /* ── BOTTOM NAV ── */
-.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--surface);border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(3,1fr);height:var(--nav-h);padding-bottom:env(safe-area-inset-bottom)}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--surface);border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(2,1fr);height:var(--nav-h);padding-bottom:env(safe-area-inset-bottom)}
 .nav-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;border:none;background:none;color:var(--muted2);font-family:'Barlow',sans-serif;font-size:11px;letter-spacing:1px;text-transform:uppercase;padding-top:6px;transition:color 0.2s}
 .nav-btn.active{color:var(--accent)}
 .nav-icon{font-size:20px;line-height:1}
@@ -134,82 +134,20 @@ html,body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif
 .set-weight-unit{font-size:12px;color:var(--muted);flex-shrink:0}
 .set-x{font-size:13px;color:var(--muted);flex-shrink:0;padding:0 1px}
 
+
+/* ── SESSION TIMER ── */
+.session-timer{margin:0 16px 12px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.st-item{display:flex;flex-direction:column;align-items:center;gap:2px;flex:1}
+.st-label{font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.st-val{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;color:var(--text)}
+.st-val.active{color:var(--accent)}
+.st-sep{color:var(--muted);font-size:18px;padding-top:10px}
+
 .rest-screen{padding:48px 24px;text-align:center}
 .rest-icon{font-size:48px;margin-bottom:20px}
 .rest-title{font-family:'Barlow Condensed',sans-serif;font-size:36px;font-weight:700;letter-spacing:2px;margin-bottom:10px}
 .rest-sub{font-size:15px;color:var(--muted2);line-height:1.7}
 
-/* ══════════════════════════════
-   DIET SCREEN
-══════════════════════════════ */
-.diet-topbar{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);padding:14px 20px 12px}
-.diet-topbar-title{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green)}
-.diet-topbar-sub{font-size:12px;color:var(--muted2);letter-spacing:1px;margin-top:1px}
-
-.diet-tabs{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border)}
-.diet-tab{padding:12px;text-align:center;font-size:13px;font-weight:500;color:var(--muted2);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s;letter-spacing:0.5px}
-.diet-tab.active{color:var(--green);border-bottom-color:var(--green)}
-
-.macro-summary{padding:20px 16px 16px}
-.macro-title{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:14px}
-.macro-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
-.macro-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 8px;text-align:center}
-.macro-val{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:700;line-height:1;margin-bottom:3px}
-.macro-label{font-size:10px;color:var(--muted2);letter-spacing:1px;text-transform:uppercase}
-.macro-unit{font-size:11px;color:var(--muted)}
-.macro-bar-wrap{margin-bottom:6px}
-.macro-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;display:flex;gap:1px}
-.mb-prot{background:var(--prot-color);height:100%}
-.mb-carb{background:var(--carb-color);height:100%}
-.mb-fat{background:var(--fat-color);height:100%}
-.macro-legend{display:flex;gap:14px;margin-top:8px}
-.ml-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--muted2)}
-.ml-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0}
-
-.day-toggle{display:flex;gap:6px;padding:0 16px 16px}
-.dt-btn{flex:1;padding:8px 4px;text-align:center;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;border-radius:8px;border:1px solid var(--border);color:var(--muted2);cursor:pointer;transition:all 0.15s;background:transparent;font-family:'Barlow',sans-serif}
-.dt-btn.active{background:rgba(74,222,128,.1);border-color:var(--green);color:var(--green)}
-
-.meals-list{padding:0 16px 24px;display:flex;flex-direction:column;gap:10px}
-.meal-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-.meal-header{padding:14px 16px 12px;display:flex;align-items:center;gap:12px;cursor:pointer}
-.meal-icon{font-size:22px;flex-shrink:0}
-.meal-info{flex:1}
-.meal-name{font-size:15px;font-weight:500;margin-bottom:2px}
-.meal-time{font-size:12px;color:var(--muted2)}
-.meal-macros-mini{font-size:12px;color:var(--muted2);display:flex;gap:10px;margin-top:4px}
-.meal-toggle-icon{font-size:18px;color:var(--muted);transition:transform 0.2s;flex-shrink:0}
-.meal-card.open .meal-toggle-icon{transform:rotate(180deg)}
-.meal-detail{display:none;border-top:1px solid var(--border)}
-.meal-card.open .meal-detail{display:block}
-.food-item{padding:10px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:8px}
-.food-item:last-child{border-bottom:none}
-.food-name{font-size:14px}
-.food-amount{font-size:12px;color:var(--muted2);margin-top:1px}
-.food-macro-pills{display:flex;gap:5px;flex-shrink:0}
-.pill{font-size:10px;font-weight:600;padding:2px 6px;border-radius:4px;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.5px}
-.pill-p{background:rgba(96,208,255,.12);color:var(--prot-color)}
-.pill-c{background:rgba(232,255,71,.1);color:var(--carb-color)}
-.pill-f{background:rgba(255,140,90,.12);color:var(--fat-color)}
-.meal-total-row{padding:10px 16px;background:rgba(255,255,255,.02);display:flex;justify-content:space-between;align-items:center}
-.mtr-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
-.mtr-vals{font-size:12px;color:var(--muted2);display:flex;gap:10px}
-
-.timing-section{padding:0 16px 20px}
-.timing-title{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted2);margin-bottom:12px;padding-top:16px}
-.timing-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-.timing-row{padding:13px 16px;border-bottom:1px solid var(--border);display:flex;gap:14px;align-items:flex-start}
-.timing-row:last-child{border-bottom:none}
-.timing-badge{font-size:10px;font-weight:700;letter-spacing:1px;padding:3px 8px;border-radius:4px;white-space:nowrap;flex-shrink:0;margin-top:1px;font-family:'Barlow Condensed',sans-serif}
-.tb-pre{background:rgba(232,255,71,.1);color:var(--accent)}
-.tb-post{background:rgba(74,222,128,.1);color:var(--green)}
-.tb-noc{background:rgba(96,208,255,.1);color:var(--blue)}
-.tb-gen{background:rgba(255,255,255,.06);color:var(--muted2)}
-.timing-text{font-size:13px;color:var(--muted2);line-height:1.6}
-.timing-text strong{color:var(--text);font-weight:500}
-.principle-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin:0 16px 8px}
-.pc-title{font-size:14px;font-weight:500;margin-bottom:4px}
-.pc-text{font-size:13px;color:var(--muted2);line-height:1.6}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .anim{animation:fadeUp 0.25s ease forwards}
@@ -230,72 +168,6 @@ html,body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif
   <div id="gymContent"></div>
 </div>
 
-<!-- ══ DIET SCREEN ══ -->
-<div id="screen-diet" class="screen">
-  <div class="diet-topbar">
-    <div class="diet-topbar-title">DIETA</div>
-    <div class="diet-topbar-sub">Volumen limpio · ~3.200 kcal</div>
-  </div>
-
-  <div class="diet-tabs">
-    <div class="diet-tab active" onclick="setDietTab('plan',this)">Plan de comidas</div>
-    <div class="diet-tab" onclick="setDietTab('tips',this)">Timing y consejos</div>
-  </div>
-
-  <div id="diet-plan">
-    <div class="macro-summary">
-      <div class="macro-title">Objetivos diarios</div>
-      <div class="macro-grid">
-        <div class="macro-card"><div class="macro-val" style="color:var(--text)">3.200</div><div class="macro-label">kcal</div></div>
-        <div class="macro-card"><div class="macro-val" style="color:var(--prot-color)">180</div><div class="macro-label">proteína</div><div class="macro-unit">g</div></div>
-        <div class="macro-card"><div class="macro-val" style="color:var(--carb-color)">415</div><div class="macro-label">carbos</div><div class="macro-unit">g</div></div>
-        <div class="macro-card"><div class="macro-val" style="color:var(--fat-color)">90</div><div class="macro-label">grasas</div><div class="macro-unit">g</div></div>
-      </div>
-      <div class="macro-bar-wrap">
-        <div class="macro-bar">
-          <div class="mb-prot" style="width:22%"></div>
-          <div class="mb-carb" style="width:52%"></div>
-          <div class="mb-fat"  style="width:26%"></div>
-        </div>
-        <div class="macro-legend">
-          <div class="ml-item"><div class="ml-dot" style="background:var(--prot-color)"></div>Proteína 22%</div>
-          <div class="ml-item"><div class="ml-dot" style="background:var(--carb-color)"></div>Carbos 52%</div>
-          <div class="ml-item"><div class="ml-dot" style="background:var(--fat-color)"></div>Grasas 26%</div>
-        </div>
-      </div>
-    </div>
-    <div class="day-toggle">
-      <button class="dt-btn active" onclick="setMealDay('gym',this)">Día gym</button>
-      <button class="dt-btn" onclick="setMealDay('rest',this)">Descanso</button>
-      <button class="dt-btn" onclick="setMealDay('padel',this)">Padel</button>
-    </div>
-    <div class="meals-list anim" id="mealsList"></div>
-  </div>
-
-  <div id="diet-tips" style="display:none">
-    <div class="timing-section">
-      <div class="timing-title">Timing por tipo de día</div>
-      <div class="timing-card">
-        <div class="timing-row"><div class="timing-badge tb-pre">PRE-GYM</div><div class="timing-text"><strong>60-90 min antes:</strong> carbos + proteína moderada. Nada graso ni con mucha fibra. Ideal: arroz + pollo o avena + huevos.</div></div>
-        <div class="timing-row"><div class="timing-badge tb-post">POST-GYM</div><div class="timing-text"><strong>Dentro de 60 min:</strong> proteína + carbos rápidos. El mejor momento para cargarte de carbos sin acumular grasa.</div></div>
-        <div class="timing-row"><div class="timing-badge tb-noc">NOCHE</div><div class="timing-text"><strong>Última comida:</strong> proteína de digestión lenta (queso, yogur griego, huevo) + grasa saludable. Reducí carbos simples.</div></div>
-        <div class="timing-row"><div class="timing-badge tb-gen">PADEL</div><div class="timing-text"><strong>Día de padel:</strong> cargás carbos al almuerzo. Post-padel recuperación igual que post-gym.</div></div>
-      </div>
-    </div>
-    <div class="timing-section">
-      <div class="timing-title">Hidratación</div>
-      <div class="timing-card">
-        <div class="timing-row"><div class="timing-badge tb-gen">BASE</div><div class="timing-text"><strong>3–3,5 litros/día.</strong> A 1,94m con actividad el requerimiento es alto. El rendimiento cae con solo 2% de deshidratación.</div></div>
-        <div class="timing-row"><div class="timing-badge tb-pre">ENTRENO</div><div class="timing-text">500ml antes, sorbos cada 15-20 min durante, 500ml post-entreno mezclados con el batido o la comida.</div></div>
-      </div>
-    </div>
-    <div class="timing-title" style="padding:0 16px 12px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted2)">Principios clave</div>
-    <div class="principle-card"><div class="pc-title">Proteína primero</div><div class="pc-text">180g/día es el objetivo no negociable. Si un día falla todo lo demás, al menos llegá a la proteína. Sin suficiente proteína, el entreno construye muy poco músculo.</div></div>
-    <div class="principle-card"><div class="pc-title">Por qué volumen y no déficit</div><div class="pc-text">Con alimentación desordenada, tu cuerpo probablemente ya esté en déficit intermitente. Un leve superávit de +200 kcal te da el sustrato para construir músculo real sin acumular grasa si los macros están bien.</div></div>
-    <div class="principle-card"><div class="pc-title">Carbos y la zona pectoral</div><div class="pc-text">La acumulación ahí responde al % de grasa corporal total, no a carbos específicos. No los elimines — son el combustible del gym y el padel. Lo que importa es el balance calórico semanal.</div></div>
-    <div class="principle-card" style="margin-bottom:24px"><div class="pc-title">Revisión cada 3-4 semanas</div><div class="pc-text">Si el peso no sube (o sube más de 1kg/mes), ajustás ±200 kcal. Si el rendimiento en gym no mejora, probablemente necesitás más carbos pre-entreno.</div></div>
-  </div>
-</div>
 
 <!-- ══ HISTORIAL SCREEN ══ -->
 <div id="screen-hist" class="screen">
@@ -308,7 +180,7 @@ html,body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif
   <div class="hist-actions">
     <button class="hist-act-btn" onclick="exportData()">⧉ Copiar</button>
     <button class="hist-act-btn" onclick="downloadData()">↓ Bajar</button>
-    <button class="hist-act-btn" onclick="importData()">↑ Restaurar</button>
+    <button class="hist-act-btn" onclick="importData()">↑ Importar</button>
   </div>
   <div id="histContent"></div>
 </div>
@@ -319,10 +191,7 @@ html,body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif
     <div class="nav-icon nav-gym-icon">💪</div>
     <span>Entreno</span>
   </button>
-  <button class="nav-btn nav-diet-btn" id="nav-diet" onclick="setScreen('diet')">
-    <div class="nav-icon nav-diet-icon">🥗</div>
-    <span>Dieta</span>
-  </button>
+
   <button class="nav-btn nav-hist-btn" id="nav-hist" onclick="setScreen('hist')">
     <div class="nav-icon">📈</div>
     <span>Historial</span>
@@ -336,61 +205,62 @@ html,body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif
 const DAYS = [
   { id:'lun', name:'Lun', shortName:'Lunes', type:'padel', label:'Padel', color:'#4ade80' },
   {
-    id:'mar', name:'Mar', shortName:'Martes', type:'pull', label:'Pull', color:'#60d0ff',
-    title:'Pull Day', subtitle:'Espalda · Bíceps · Core', duration:'55-60 min',
-    sections:[
-      { name:'Espalda', exercises:[
-        { name:'Dominadas o jalón al pecho', sets:4, reps:'6-10', note:'Agarre pronado ancho. Llevá el pecho hacia la barra, no la barbilla.' },
-        { name:'Remo con mancuerna a un brazo', sets:4, reps:'10-12 c/brazo', note:'Mano y rodilla del mismo lado apoyadas en el banco, espalda paralela al piso. Codo hacia la cadera, sin rotar el torso para ganar recorrido.' },
-        { name:'Remo en polea baja sentado', sets:3, reps:'10-12', note:'Retracción escapular completa al final. Codos pegados al cuerpo.' },
-        { name:'Face pull en polea alta (cuerda)', sets:3, reps:'15', note:'Rotación externa de hombros al final. Esencial después del padel del lunes.' },
-      ]},
-      { name:'Bíceps', exercises:[
-        { name:'Curl con barra EZ', sets:3, reps:'10-12', note:'Sin oscilar el torso. Codos fijos a los costados del cuerpo.' },
-        { name:'Curl martillo con mancuernas', sets:2, reps:'12', note:'Trabaja braquial y braquiorradial. Buen complemento para volumen de brazo.' },
-      ]},
-      { name:'Core — Antirrotación', exercises:[
-        { name:'Pallof press en polea', sets:3, reps:'12 c/lado', note:'Caderas cuadradas durante todo el movimiento. Resistí activamente la rotación.' },
-      ]},
-    ]
-  },
-  {
-    id:'mie', name:'Mié', shortName:'Miércoles', type:'legs', label:'Legs', color:'#ff8c5a',
-    title:'Leg Day', subtitle:'Piernas · Glúteos · Core', duration:'60-65 min',
-    sections:[
-      { name:'Cuádriceps · Glúteos', exercises:[
-        { name:'Sentadilla con barra', sets:4, reps:'6-8', note:'Por debajo de paralelo si la movilidad lo permite. Rodillas en línea con los pies.' },
-        { name:'Sentadilla búlgara con mancuernas', sets:3, reps:'8-10 c/pierna', note:'Pie trasero elevado en el banco. La rodilla de adelante no se va hacia adentro. Semanas 1-2 solo peso corporal o mancuernas livianas, aprendiendo el patrón.' },
-        { name:'Prensa 45°', sets:3, reps:'10-12', note:'Rango completo. No bloquees las rodillas arriba. Pie en posición media.' },
-      ]},
-      { name:'Isquios · Glúteos · Gemelos', exercises:[
-        { name:'Peso muerto rumano', sets:4, reps:'8-10', note:'Barra cerca del cuerpo en todo momento. Sentís el estiramiento en isquios.' },
-        { name:'Curl femoral tumbado', sets:3, reps:'12-15', note:'Controlá la bajada. No uses inercia ni levantés las caderas.' },
-        { name:'Elevación de gemelos de pie', sets:3, reps:'15-20', note:'Pausa de 1 seg arriba y 1 seg abajo. Rango completo de movimiento.' },
-      ]},
-      { name:'Core — Flexión Dinámica', exercises:[
-        { name:'Cable crunch en polea alta', sets:3, reps:'15', note:'Flexión de columna, no de caderas. Codos fijos a los costados de la cabeza.' },
-      ]},
-    ]
-  },
-  {
-    id:'jue', name:'Jue', shortName:'Jueves', type:'push', label:'Push', color:'#e8ff47',
+    id:'mar', name:'Mar', shortName:'Martes', type:'push', label:'Push', color:'#e8ff47',
     title:'Push Day', subtitle:'Pecho · Hombros · Tríceps · Core', duration:'55-60 min',
     sections:[
       { name:'Pecho', exercises:[
-        { name:'Press banca plano con barra', sets:4, reps:'6-8', note:'Descenso controlado 3 seg, codos a 75°. Conectá el pectoral al bajar.' },
-        { name:'Press inclinado con mancuernas (30°)', sets:3, reps:'8-10', note:'Ángulo 30°, no más. Énfasis en pec superior — clave para la zona de acumulación.' },
+        { name:'Press banca plano con barra', sets:4, reps:'6-8', note:'Descendé controlado 3 seg. Progresá 2.5kg cuando completes todas las reps. ⚠️ Cargá solo el peso de UN lado — la app suma el otro lado + 20kg de barra.', banca:true },
+        { name:'Press inclinado con mancuernas (30°)', sets:3, reps:'8-10', note:'Ángulo 30°, no más. Énfasis en pec superior.' },
+        { name:'Aperturas en polea cruzada', lbs:true, sets:3, reps:'12-15', note:'Bombeo, peso moderado. Contracción completa en el centro, sin inercia.' },
       ]},
       { name:'Hombros · Tríceps', exercises:[
-        { name:'Press militar con mancuernas', sets:3, reps:'8-10', note:'Único empuje vertical de la semana: va tercero para que lo hagas con energía. No arquees la lumbar.' },
-        { name:'Fondos en paralelas (dips)', sets:3, reps:'8-12', note:'Inclinarte adelante aumenta el énfasis pectoral. Bajá hasta 90° de codo.' },
+        { name:'Press militar en máquina', sets:3, reps:'8-10', note:'Único empuje vertical de la semana. No arquees la lumbar.' },
         { name:'Elevaciones laterales', sets:4, reps:'12-15', note:'Peso liviano, descanso corto. Codo ligeramente flexionado. Es el trabajo que más ancho de hombro te da.' },
+        { name:'Tríceps con soga en polea', lbs:true, sets:3, reps:'10-12', note:'Abrí las manos al final del recorrido para extensión completa.' },
       ]},
-      { name:'Pecho — Aislamiento', exercises:[
-        { name:'Aperturas en polea cruzada baja→alta', sets:2, reps:'12-15', note:'Ángulo ascendente ataca el pec inferior. Contracción completa en el centro, sin inercia.' },
+      { name:'Finisher · Core', exercises:[
+        { name:'Flexiones de pecho', sets:3, reps:'hasta fallo', note:'Al final de la sesión, sin peso adicional. Llegá al fallo real.' },
+        { name:'Ab wheel / plancha dinámica', sets:3, reps:'8-10', note:'Antiextensión. Columna neutra durante todo el movimiento.' },
       ]},
-      { name:'Core — Antiextensión', exercises:[
-        { name:'Elevación de piernas colgado', sets:3, reps:'10-12', note:'Sin balanceo. Enrollá la pelvis al final — no alcanza con levantar las piernas. Si no llegás a 10, empezá con rodillas al pecho.' },
+    ]
+  },
+  {
+    id:'mie', name:'Mié', shortName:'Miércoles', type:'pull', label:'Pull', color:'#60d0ff',
+    title:'Pull Day', subtitle:'Espalda · Bíceps · Core', duration:'55-60 min',
+    sections:[
+      { name:'Espalda', exercises:[
+        { name:'Dominadas', sets:3, reps:'máx', note:'Agarre pronado. Llevá el pecho hacia la barra. Si no llegás a 5, hacé asistidas o jalón.' },
+        { name:'Jalón al pecho en máquina', sets:4, reps:'8-10', note:'Retracción escapular completa. Codos hacia abajo y atrás.' },
+        { name:'Remo con mancuerna a un brazo', sets:4, reps:'10-12 c/brazo', note:'Espalda paralela al piso. Codo hacia la cadera, sin rotar el torso.' },
+        { name:'Remo en polea baja sentado', sets:3, reps:'10-12', note:'Retracción escapular completa al final. Codos pegados al cuerpo.' },
+        { name:'Face pull en polea (cuerda)', lbs:true, sets:3, reps:'15', note:'Rotación externa de hombros al final. Esencial después del padel del lunes.' },
+      ]},
+      { name:'Bíceps', exercises:[
+        { name:'Curl con barra EZ', sets:3, reps:'8-10', note:'Subí la carga — estás estancado. Sin oscilar el torso. Codos fijos.' },
+        { name:'Curl martillo con mancuernas', sets:2, reps:'10-12', note:'Trabaja braquial y braquiorradial.' },
+      ]},
+      { name:'Core — Antirrotación', exercises:[
+        { name:'Pallof press en polea', lbs:true, sets:3, reps:'12 c/lado', note:'Caderas cuadradas durante todo el movimiento. Resistí la rotación.' },
+      ]},
+    ]
+  },
+  {
+    id:'jue', name:'Jue', shortName:'Jueves', type:'legs', label:'Legs', color:'#ff8c5a',
+    title:'Leg Day', subtitle:'Piernas · Glúteos · Core', duration:'60-65 min',
+    sections:[
+      { name:'Cuádriceps · Glúteos', exercises:[
+        { name:'Sentadilla con barra', sets:4, reps:'6-8', note:'Por debajo de paralelo. Rodillas en línea con los pies. Subí más rápido — las piernas aguantan más carga.' },
+        { name:'Sentadilla búlgara con mancuernas', sets:3, reps:'8-10 c/pierna', note:'Pie trasero elevado. La rodilla de adelante no se va hacia adentro.' },
+        { name:'Prensa 45°', sets:3, reps:'10', note:'Rango completo. No bloquees las rodillas arriba.' },
+      ]},
+      { name:'Isquios · Glúteos · Gemelos', exercises:[
+        { name:'Peso muerto rumano', sets:4, reps:'8', note:'Barra cerca del cuerpo. Sentís el estiramiento en isquios. Subí más rápido también.' },
+        { name:'Curl femoral tumbado', lbs:true, sets:3, reps:'12', note:'Controlá la bajada. No uses inercia ni levantés las caderas.' },
+        { name:'Elevación de gemelos de pie', sets:3, reps:'15-20', note:'Pausa 1 seg arriba y 1 seg abajo. Rango completo.' },
+      ]},
+      { name:'Core', exercises:[
+        { name:'Cable crunch en polea alta', lbs:true, sets:3, reps:'15', note:'Flexión de columna, no de caderas. Codos fijos a los costados de la cabeza.' },
+        { name:'Patadas al cielo (hip thrust en suelo)', sets:3, reps:'12', note:'Enrollá la pelvis al final. Mantené el core apretado durante todo el movimiento.' },
       ]},
     ]
   },
@@ -407,14 +277,13 @@ let gymState = JSON.parse(localStorage.getItem('rutina_state') || '{}');
    Push pasa de martes a jueves, Pull de miércoles a martes, Legs de jueves a miércoles.
    Los pesos se guardaban por posición, así que hay que remapearlos o quedan en el
    ejercicio equivocado. Corre una sola vez. */
-const ROUTINE_VER = 3;
+const ROUTINE_VER = 4;
 (function migrateRoutine() {
   if (parseInt(localStorage.getItem('rutina_ver') || '1', 10) >= ROUTINE_VER) return;
-  const MAP = {
-    mar: { day:'jue', idx:{0:0, 1:1, 2:5, 3:2, 4:4, 5:3} },
-    mie: { day:'mar', idx:{0:0, 2:2, 3:3, 4:4, 5:5, 6:6} },
-    jue: { day:'mie', idx:{0:0, 1:2, 3:3, 4:4, 5:5, 6:6} }
-  };
+  // v3→v4: Push vuelve a martes, Pull a miércoles, Legs a jueves
+  // Estructura nueva: mar=push(8ex), mie=pull(8ex), jue=legs(8ex)
+  // No remapeamos pesos — el usuario los va a cargar de nuevo con la rutina nueva
+  const MAP = {};
   const out = {};
   Object.keys(gymState).forEach(k => {
     const m = k.match(/^(lun|mar|mie|jue|vie|sab|dom)_(\d+)(.*)$/);
@@ -522,12 +391,14 @@ function renderGym() {
       <div class="progress-label"><span>Progreso</span><span>${pct}%</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
     </div>
+    ${renderTimerHTML(day.id)}
     <div class="complete-banner ${allDone?'show':''}">
       <div style="font-size:24px">🏆</div>
       <div><div class="cb-text">¡Sesión completada!</div><div class="cb-sub">Excelente trabajo. Recuperate bien.</div></div>
     </div>`;
 
   let g = 0;
+  let prefilled = false;
   day.sections.forEach(sec => {
     html += `<div class="section-label">${sec.name}</div>`;
     sec.exercises.forEach(ex => {
@@ -541,6 +412,11 @@ function renderGym() {
         const rp = gymState[sk+'_reps'] || '';
         const repUnit = /seg/i.test(ex.reps) ? 'seg' : 'reps';
         const pset = prev && prev.sets[s] ? prev.sets[s] : null;
+        // Pre-fill con último valor si el campo está vacío hoy, y persistir en gymState
+        const kgVal = kg || (pset && pset.kg ? pset.kg : '');
+        const rpVal = rp || (pset && pset.reps ? pset.reps : '');
+        if (!kg && kgVal) { gymState[sk+'_kg'] = kgVal; prefilled = true; }
+        if (!rp && rpVal) { gymState[sk+'_reps'] = rpVal; prefilled = true; }
         const kgHint = pset && pset.kg ? pset.kg : '—';
         const repHint = (pset && pset.reps) ? pset.reps : (ex.reps.match(/\d+(-\d+)?/) || ['—'])[0];
         sets += `<div class="set-row">
@@ -548,15 +424,15 @@ function renderGym() {
           <div class="set-weight-wrap">
             <div class="set-field">
               <input type="number" inputmode="decimal" placeholder="${kgHint}"
-                class="set-weight-input ${kg?'has-value':''}" value="${kg}"
+                class="set-weight-input ${kgVal?'has-value':''}" value="${kgVal}"
                 onclick="event.stopPropagation()"
                 oninput="saveWeight('${day.id}',${g},${s},this.value)">
-              <span class="set-weight-unit">kg</span>
+              <span class="set-weight-unit">${ex.banca?'kg/lado':ex.lbs?'lbs':'kg'}</span>
             </div>
             <span class="set-x">×</span>
             <div class="set-field">
               <input type="number" inputmode="numeric" placeholder="${repHint}"
-                class="set-weight-input set-reps-input ${rp?'has-value':''}" value="${rp}"
+                class="set-weight-input set-reps-input ${rpVal?'has-value':''}" value="${rpVal}"
                 onclick="event.stopPropagation()"
                 oninput="saveReps('${day.id}',${g},${s},this.value)">
               <span class="set-weight-unit">${repUnit}</span>
@@ -570,7 +446,7 @@ function renderGym() {
           <div class="ex-info"><div class="ex-name">${ex.name}</div><div class="ex-sets">${ex.sets} series × ${ex.reps}</div></div>
           <div class="ex-toggle">⌄</div>
         </div>
-        <div class="ex-detail"><div class="ex-note">${ex.note}</div>${prev&&prev.sets.some(s=>s.kg||s.reps)?`<div class="last-line">Última vez (${fmtDate(prev.date)}): ${prev.sets.filter(s=>s.kg||s.reps).map(s=>`${s.kg||'—'}kg × ${s.reps||'—'}`).join('  ·  ')}</div>`:''}<div class="sets-tracker">${sets}</div></div>
+        <div class="ex-detail"><div class="ex-note">${ex.note}</div>${prev&&prev.sets.some(s=>s.kg||s.reps)?`<div class="last-line">Última vez (${fmtDate(prev.date)}): ${prev.sets.filter(s=>s.kg||s.reps).map(s=>`${ex.banca&&s.kg?(parseFloat(s.kg)*2+20)+'kg total ('+s.kg+'kg/lado)':s.kg||(ex.lbs?'—lbs':'—kg')}${ex.lbs?' lbs':ex.banca?'':' kg'} × ${s.reps||'—'}`).join('  ·  ')}</div>`:''}<div class="sets-tracker">${sets}</div></div>
       </div>`;
       g++;
     });
@@ -582,6 +458,7 @@ function renderGym() {
   </div>`;
 
   html += `</div>`;
+  if (prefilled) saveGymState();
   content.innerHTML = html;
 }
 
@@ -612,6 +489,7 @@ function toggleSet(dayId, exIdx, setIdx, e) {
   e.stopPropagation();
   const sk = getSetKey(dayId, exIdx, setIdx);
   gymState[sk] = !gymState[sk];
+  if (gymState[sk]) recordSetTime(dayId);
   const day = DAYS.find(d => d.id === dayId);
   let g=0, ex=null;
   day.sections.forEach(s => s.exercises.forEach(e2 => { if (g===exIdx) ex=e2; g++; }));
@@ -771,169 +649,67 @@ function downloadData() {
 }
 
 function importData() {
-  const txt = prompt('Pegá acá el backup (el texto que empieza con { ):');
-  if (!txt) return;
-  let data;
-  try { data = JSON.parse(txt); } catch(err) { alert('No pude leer ese texto — ¿está completo?'); return; }
-  if (!data || !Array.isArray(data.history)) { alert('El backup no tiene el formato esperado.'); return; }
-  const known = new Set(sessionLog.map(s => s.id));
-  const nuevas = data.history.filter(s => !known.has(s.id));
-  if (!confirm(`Se van a agregar ${nuevas.length} sesiones al historial actual (${sessionLog.length}). Lo que ya tenés no se borra. ¿Seguir?`)) return;
-  sessionLog = sessionLog.concat(nuevas).sort((a,b) => a.ts - b.ts);
-  saveHistory();
-  if (data.current && Object.keys(data.current).length && confirm('¿También querés restaurar el día en curso que venía en el backup? (pisa lo que tengas cargado sin guardar)')) {
-    gymState = data.current; saveGymState();
-  }
-  renderHistory(); renderGym();
-  alert('Restaurado ✓');
+  // Crear input file oculto
+  const inp = document.createElement('input');
+  inp.type = 'file'; inp.accept = '.json,application/json';
+  inp.style.display = 'none';
+  document.body.appendChild(inp);
+  inp.addEventListener('change', function() {
+    const file = inp.files[0];
+    if (!file) { document.body.removeChild(inp); return; }
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      document.body.removeChild(inp);
+      let data;
+      try { data = JSON.parse(e.target.result); } catch(err) { alert('No pude leer ese archivo — ¿está completo?'); return; }
+      if (!data || !Array.isArray(data.history)) { alert('El archivo no tiene el formato esperado.'); return; }
+      const known = new Set(sessionLog.map(s => s.id));
+      const nuevas = data.history.filter(s => !known.has(s.id));
+      if (nuevas.length === 0) { alert('No hay sesiones nuevas — todo ya está en tu historial.'); return; }
+      sessionLog = sessionLog.concat(nuevas).sort((a,b) => (a.ts||0) - (b.ts||0));
+      saveHistory();
+      renderHistory(); renderGym();
+      alert(`✓ ${nuevas.length} sesión${nuevas.length>1?'es':''} importada${nuevas.length>1?'s':''}.\nTotal historial: ${sessionLog.length} sesiones.`);
+    };
+    reader.readAsText(file);
+  });
+  inp.click();
 }
 
-/* ═══════════════════════════════════════
-   DATA — DIET
-═══════════════════════════════════════ */
-const MEALS = {
-  gym:[
-    { name:'Desayuno', time:'7:00 – 8:00', icon:'🌅', foods:[
-      { name:'Avena', amount:'100g', p:13, c:62, f:7 },
-      { name:'Huevos enteros', amount:'3 unidades', p:18, c:1, f:15 },
-      { name:'Claras de huevo', amount:'4 claras', p:14, c:0, f:0 },
-      { name:'Banana', amount:'1 mediana', p:1, c:27, f:0 },
-      { name:'Leche entera o vegetal', amount:'200ml', p:7, c:10, f:7 },
-    ]},
-    { name:'Batido pre/post gym', time:'Antes o después del gym', icon:'🥤', foods:[
-      { name:'Proteína en polvo (whey)', amount:'1 scoop (30g)', p:24, c:3, f:2 },
-      { name:'Leche o agua', amount:'300ml', p:10, c:15, f:8 },
-      { name:'Fruta (naranja o manzana)', amount:'1 unidad', p:0, c:20, f:0 },
-    ]},
-    { name:'Almuerzo', time:'13:00 – 14:00', icon:'🍽️', foods:[
-      { name:'Pechuga de pollo o milanesa', amount:'250g cocido', p:58, c:0, f:5 },
-      { name:'Arroz blanco o integral', amount:'150g cocido', p:3, c:35, f:0 },
-      { name:'Puré de papa o batata', amount:'200g', p:4, c:40, f:0 },
-      { name:'Ensalada (lechuga, tomate, pepino)', amount:'libre', p:2, c:5, f:0 },
-      { name:'Aceite de oliva', amount:'1 cdita', p:0, c:0, f:5 },
-    ]},
-    { name:'Cena', time:'20:00 – 21:00', icon:'🌙', foods:[
-      { name:'Carne vacuna magra (lomo, peceto)', amount:'200g', p:44, c:0, f:10 },
-      { name:'Lentejas o garbanzos', amount:'150g cocido', p:12, c:30, f:2 },
-      { name:'Vegetales salteados', amount:'200g', p:4, c:12, f:3 },
-      { name:'Yogur griego natural', amount:'200g', p:20, c:8, f:4 },
-    ]},
-  ],
-  rest:[
-    { name:'Desayuno', time:'8:00 – 9:00', icon:'🌅', foods:[
-      { name:'Avena', amount:'80g', p:10, c:50, f:6 },
-      { name:'Huevos enteros', amount:'3 unidades', p:18, c:1, f:15 },
-      { name:'Frutas variadas', amount:'150g', p:1, c:22, f:0 },
-      { name:'Leche entera', amount:'200ml', p:7, c:10, f:7 },
-    ]},
-    { name:'Almuerzo', time:'13:00 – 14:00', icon:'🍽️', foods:[
-      { name:'Salmón o atún al horno', amount:'200g', p:46, c:0, f:12 },
-      { name:'Arroz integral', amount:'120g cocido', p:3, c:28, f:1 },
-      { name:'Brócoli o coliflor al vapor', amount:'250g', p:6, c:12, f:0 },
-      { name:'Palta', amount:'½ unidad', p:1, c:4, f:10 },
-    ]},
-    { name:'Cena', time:'20:00 – 21:00', icon:'🌙', foods:[
-      { name:'Pollo al horno o a la plancha', amount:'220g', p:50, c:0, f:6 },
-      { name:'Batata asada', amount:'150g', p:2, c:32, f:0 },
-      { name:'Ensalada completa con huevo', amount:'—', p:10, c:8, f:7 },
-      { name:'Yogur griego o queso cottage', amount:'200g', p:20, c:6, f:4 },
-    ]},
-  ],
-  padel:[
-    { name:'Desayuno', time:'7:00 – 8:00', icon:'🌅', foods:[
-      { name:'Avena', amount:'100g', p:13, c:62, f:7 },
-      { name:'Huevos revueltos', amount:'3 unidades', p:18, c:1, f:15 },
-      { name:'Banana', amount:'1 mediana', p:1, c:27, f:0 },
-      { name:'Leche entera', amount:'200ml', p:7, c:10, f:7 },
-    ]},
-    { name:'Almuerzo — carga de carbos', time:'12:30 – 13:30', icon:'⚡', foods:[
-      { name:'Pasta (fideos o tallarines)', amount:'200g cocido', p:8, c:60, f:2 },
-      { name:'Salsa de tomate con carne picada', amount:'150g carne', p:35, c:10, f:8 },
-      { name:'Pan integral', amount:'2 rebanadas', p:6, c:28, f:2 },
-    ]},
-    { name:'Post-padel — recuperación', time:'Después del partido', icon:'🎾', foods:[
-      { name:'Batido de proteína', amount:'1 scoop', p:24, c:3, f:2 },
-      { name:'Leche', amount:'300ml', p:10, c:15, f:8 },
-      { name:'Banana o fruta', amount:'1 unidad', p:1, c:25, f:0 },
-    ]},
-    { name:'Cena', time:'Al llegar a casa', icon:'🌙', foods:[
-      { name:'Carne o pollo', amount:'200g', p:44, c:0, f:8 },
-      { name:'Arroz o papa', amount:'150g cocido', p:3, c:35, f:0 },
-      { name:'Verduras', amount:'200g', p:4, c:10, f:2 },
-      { name:'Yogur griego', amount:'200g', p:20, c:8, f:4 },
-    ]},
-  ],
-};
 
-let currentMealDay = 'gym';
-let openMeals = {};
 
-function setMealDay(type, el) {
-  currentMealDay = type; openMeals = {};
-  document.querySelectorAll('.dt-btn').forEach(b => b.classList.remove('active'));
-  el.classList.add('active');
-  renderMeals();
+/* ── SESSION TIMER ── */
+function getTimerKey(dayId) { return dayId + '_timer'; }
+function recordSetTime(dayId) {
+  const tk = getTimerKey(dayId);
+  const now = Date.now();
+  if (!gymState[tk]) gymState[tk] = { start: now, end: now };
+  else gymState[tk].end = now;
+  saveGymState();
 }
-
-function toggleMeal(idx) {
-  openMeals[idx] = !openMeals[idx]; renderMeals();
+function fmtMs(ms) {
+  const s = Math.floor(ms / 1000);
+  const m = Math.floor(s / 60);
+  const h = Math.floor(m / 60);
+  if (h > 0) return h + 'h ' + (m % 60) + 'min';
+  return m + 'min ' + (s % 60) + 'seg';
 }
-
-function calcMealTotals(foods) {
-  return foods.reduce((a,f) => ({ kcal:a.kcal+f.p*4+f.c*4+f.f*9, p:a.p+f.p, c:a.c+f.c, f:a.f+f.f }), {kcal:0,p:0,c:0,f:0});
+function fmtHHMM(ts) {
+  const d = new Date(ts);
+  return d.getHours().toString().padStart(2,'0') + ':' + d.getMinutes().toString().padStart(2,'0');
 }
-
-function renderMeals() {
-  const meals = MEALS[currentMealDay];
-  const list = document.getElementById('mealsList');
-  list.innerHTML = meals.map((meal, idx) => {
-    const t = calcMealTotals(meal.foods);
-    const isOpen = !!openMeals[idx];
-    const foods = meal.foods.map(f => `
-      <div class="food-item">
-        <div><div class="food-name">${f.name}</div><div class="food-amount">${f.amount}</div></div>
-        <div class="food-macro-pills">
-          <span class="pill pill-p">${f.p}P</span>
-          <span class="pill pill-c">${f.c}C</span>
-          <span class="pill pill-f">${f.f}G</span>
-        </div>
-      </div>`).join('');
-    return `<div class="meal-card ${isOpen?'open':''}">
-      <div class="meal-header" onclick="toggleMeal(${idx})">
-        <div class="meal-icon">${meal.icon}</div>
-        <div class="meal-info">
-          <div class="meal-name">${meal.name}</div>
-          <div class="meal-time">${meal.time}</div>
-          <div class="meal-macros-mini">
-            <span style="color:var(--prot-color)">${t.p}g P</span>
-            <span style="color:var(--carb-color)">${t.c}g C</span>
-            <span style="color:var(--fat-color)">${t.f}g G</span>
-            <span>${t.kcal} kcal</span>
-          </div>
-        </div>
-        <div class="meal-toggle-icon">⌄</div>
-      </div>
-      <div class="meal-detail">
-        ${foods}
-        <div class="meal-total-row">
-          <span class="mtr-label">Total</span>
-          <div class="mtr-vals">
-            <span style="color:var(--prot-color)">${t.p}g</span>
-            <span style="color:var(--carb-color)">${t.c}g</span>
-            <span style="color:var(--fat-color)">${t.f}g</span>
-            <span>${t.kcal} kcal</span>
-          </div>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function setDietTab(tab, el) {
-  document.querySelectorAll('.diet-tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('diet-plan').style.display = tab==='plan' ? 'block' : 'none';
-  document.getElementById('diet-tips').style.display = tab==='tips' ? 'block' : 'none';
+function renderTimerHTML(dayId) {
+  const tk = getTimerKey(dayId);
+  const t = gymState[tk];
+  if (!t) return '';
+  const dur = t.end - t.start;
+  return '<div class="session-timer">' +
+    '<div class="st-item"><div class="st-label">Inicio</div><div class="st-val active">' + fmtHHMM(t.start) + '</div></div>' +
+    '<div class="st-sep">·</div>' +
+    '<div class="st-item"><div class="st-label">Último set</div><div class="st-val">' + fmtHHMM(t.end) + '</div></div>' +
+    '<div class="st-sep">·</div>' +
+    '<div class="st-item"><div class="st-label">Duración</div><div class="st-val active">' + fmtMs(dur) + '</div></div>' +
+  '</div>';
 }
 
 /* ═══════════════════════════════════════
@@ -951,7 +727,6 @@ function setScreen(name) {
 renderTopDate();
 renderWeekStrip();
 renderGym();
-renderMeals();
 renderHistory();
 </script>
 </body>
